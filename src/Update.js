@@ -1,36 +1,55 @@
-import React, { useState } from 'react'
-import { NavLink,Link } from 'react-router-dom';
-import axios from 'axios';
+import React from 'react'
+import { useState,useEffect } from "react";
+import axios from "axios";
+import {Link,useParams } from 'react-router-dom';
 
-const LoginPage = () => {
+const Update = () => {
+    const {id} = useParams();
+    const[data,setData]=useState({
+        firstname:"",surname:"",mobile:"",password:"",date:"",month:"",year:"",gender:""
+    });
+    
 
-const[data,setData]=useState({
-    firstname:"",surname:"",mobile:"",password:"",date:"",month:"",year:"",gender:""
-});
+    const handleInput = (e) => {
+        setData((prev)=>({...prev,[ e.target.name]:e.target.value}));
+    };
 
-let name,value;
-const handleInput=(e)=>{
-    name=e.target.name;
-    value=e.target.value; 
-    setData({...data,[name]:value});
-}
-
-    const handleSubmit =(e)=>{
-        e.preventDefault();
-        axios.post('http://localhost:8081/sign',data)
-        .then(res => console.log(res))
+    useEffect(()=>{
+        axios.get("http://localhost:8081/logindetails/"+id)
+        .then(res =>{
+            setData(res.data[0]);
+        })
         .catch(err => console.log(err));
-        
-}
+    },[id]);
+    console.log(data);
+    const handleUpdate= async (e) => {
+        e.preventDefault();
+        try{
+            await axios.put(`http://localhost:8081/login/${id}`, data);
+            console.log("Success")
+        }catch(err){
+            console.log(err);
+        } 
+    };   
+    const handleDelete= async (e) => {
+        e.preventDefault();
+        try{
+            await axios.delete(`http://localhost:8081/login/${id}`, data);
+            console.log("Deleted")
+        }catch(err){
+            console.log(err);
+        } 
+    };  
+
 
   return (
-        <div className="container">
-            <h1>facebook</h1>
+    <div className="container">
+            <h1>Update Details</h1>
             <form >
             <div className='signup-form'>
             <div className='form-content'>
-                <h3>Create a new account</h3>
-                <h4>It's quick and easy</h4>
+                <h3>Update account</h3>
+                
                 <hr/>
                     <div className='first-row'>
                         <div className="firstname">
@@ -46,9 +65,8 @@ const handleInput=(e)=>{
                         </div><div>
                         <input type="password" name='password' placeholder='New password'value={data.password} onChange={handleInput} size={60}required/>
                         </div><div>
-                        <label>Date of birth :</label>
+                        <label  >Date of birth :</label>
                         <select className='date' name="date"  value={data.date} onChange={handleInput} >
-                        <option value="" disable="true"  hidden>Date</option>
                         <option >01</option><option >02</option><option >03</option><option >04</option><option >05</option>
                         <option >06</option><option >07</option><option >08</option><option >09</option><option >10</option>
                         <option >11</option><option >12</option><option >13</option><option >15</option>
@@ -58,13 +76,11 @@ const handleInput=(e)=>{
                         <option >30</option><option >31</option>
                         </select>
                         <select className='month' name="month"  value={data.month} onChange={handleInput} >
-                        <option value="" disable="true"  hidden>Month</option>
                             <option value="jan">Jan</option><option value="Feb">Feb</option><option value="Mar">Mar</option><option value="Apr">Apr</option>
                             <option value="May">May</option><option value="jun">Jun</option><option value="Jul">Jul</option><option value="Aug">Jan</option>
                             <option value="Sep">Sep</option><option value="Oct">Oct</option><option value="Nov">Nov</option><option value="Dec">Dec</option>
                         </select>
                         <select className='year' name="year"  value={data.year} onChange={handleInput} >
-                        <option value="" disable="true"  hidden>Year</option>
                         <option value="1990">1990</option><option value="1991">1991</option><option value="1992">1992</option><option value="1992">1992</option><option value="1993">1993</option>
                         <option value="1994">1994</option><option value="1995">1995</option><option value="1996">1996</option><option value="1997">1997</option><option value="1998">1998</option>
                         <option value="1999">1999</option><option value="2000">2000</option><option value="2001">2001</option><option value="2002">2002</option><option value="2003">2003</option>
@@ -77,22 +93,19 @@ const handleInput=(e)=>{
                         </div>
                     </div>
                     <div className='para'>
-                        <p>People who use our service may have uploaded your contact information to Facebook. <a href="https://www.facebook.com/help/637205020878504"  target="_blank" rel="noreferrer">Learn more</a> </p>
-                        <br/>
-                        <p>By clicking Sign Up, you agree to our Terms, Privacy Policy and Cookies Policy. You may receive SMS notifications from us and can opt out at any time.</p>
                     </div>
+                    <div className='delete'>
                     <div className='signup-button'>
-                        <button onClick={handleSubmit}><Link to="/list">Sign up</Link></button>
+                    <button onClick={handleUpdate}><Link to="/list">Update</Link></button>
                     </div>
-                    <div className="sign-link">
-                        <NavLink to="/">Already have an account?</NavLink>
+                    <div className='delete-button'>
+                    <button onClick={handleDelete}><Link to="/list">Delete</Link></button>
                     </div>
+                    </div>
+                    
             </div>
             </div>
             </form>
-        </div>
-  )
-}
-
-
-export default LoginPage;
+        </div>  )
+  }
+export default Update;

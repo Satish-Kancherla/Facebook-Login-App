@@ -7,14 +7,51 @@
 body{
   background-color: whitesmoke;
 }
+.delete-button button{
+  margin-top: 30px;width: 150px;height: 40px;border: none;font-weight: bold;font-size: 20px;text-align: center;
+  background-color: red;color: white;border-radius: 10px;padding-bottom: 5px;
+}
+.delete-button button:hover{
+  background-color: rgba(255, 0, 0, 0.619);
+}
+.signup-button button a{
+  text-decoration: none;color: white;
+}
+.delete-button button a{
+  text-decoration: none;color: white;
+}
+.delete{
+  display: flex;justify-content: space-between;
+}
+.updatepage-content{
+  display: flex;justify-content: center;text-align: center;align-items: center;
+}
+.updatepage-table{
+  border-spacing:0 15px; border-collapse: collapse;
+}
+.update-btn{
+  display: flex;justify-content: center;margin-top: 20px;font-size: 18px;
+}
+.update-btn button{
+  background: #071952;border: none;border-radius: 5px;width: 150px;height: 30px;
+}
+.update-btn button a{
+  color: white;text-decoration: none;
+}
+.update-btn button:hover{
+  background-color: #172e7d;
+}
 .container{
   text-align: center;
 }
 .container h1{
-  font-size: 60px;color:#207DFF ;margin-top: 50px;
+  font-size: 60px;color:#207DFF ;
+}
+.signup-form{
+  display: flex;justify-content: center;
 }
 .form-content{
-  margin: 10px;background-color: white;border-radius: 10px;padding: 0 40px;margin:30px 35%;
+  margin: 10px;background-color: white;border-radius: 10px;padding: 0 40px;margin:0px 35%;margin-bottom: 30px;
   width: 600px;height: 630px;text-align: center;box-shadow: 0 20px 20px rgba(0,0,0,0.6);
 }
 .form-content h3{
@@ -41,7 +78,8 @@ label{
   border: 1px solid black;border-radius: 3px;margin-right:10px;width: 100px;height: 30px;margin-top: 10px;text-align: center;font-size: 15px;font-weight: 500;
 }
 .month{
-  border: 1px solid black;border-radius: 3px;margin-right:10px;width: 100px;height: 30px;text-align: center;font-size: 15px;font-weight: 500;
+  border: 1px solid black;border-radius: 3px;margin-right:10px;
+  width: 100px;height: 30px;text-align: center;font-size: 15px;font-weight: 500;
 }
 .year{
   border: 1px solid black;border-radius: 3px;width: 100px;height: 30px;text-align: center;font-size: 15px;font-weight: 500;
@@ -52,6 +90,9 @@ label{
 .para{
   font-size: 13px;margin-top: 20px;text-align: left;
 }
+.para a{
+  text-decoration: none;color: #207DFF;
+}
 
 .signup-button button{
   margin-top: 30px;width: 150px;height: 40px;border: none;font-weight: bold;font-size: 20px;text-align: center;
@@ -61,9 +102,12 @@ label{
 .login-container{
   text-align: center;
 }
+.login-form{
+  display: flex;justify-content: center;
+}
 
 .login-container h1{
-  margin-top:200px;font-size: 60px;color:#207DFF ;
+  margin-top:50px;font-size: 60px;color:#207DFF ;
 }
 .login-content{
  padding: 30px;box-shadow: 0 20px 20px rgba(0,0,0,0.6);
